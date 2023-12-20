@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
 import classes from "./header.module.css";
 import { useCart } from "../../hooks/useCart";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Header = () => {
-  const user = {
-    name: "John",
-  };
-
-  const logout = () => {
-    console.log("Logout");
-  };
+  const { user, logout } = useAuth();
 
   const { cart } = useCart();
 
