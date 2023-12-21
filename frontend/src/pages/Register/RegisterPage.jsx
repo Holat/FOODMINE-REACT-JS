@@ -5,7 +5,7 @@ import Title from "../../components/Title/Title";
 import classes from "./registerPage.module.css";
 import Button from "../../components/Button/Button";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 export default function RegisterPage() {
   const auth = useAuth();

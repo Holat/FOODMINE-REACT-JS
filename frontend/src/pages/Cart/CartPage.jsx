@@ -1,6 +1,6 @@
 import Title from "../../components/Title/Title";
 import { Link } from "react-router-dom";
-import { useCart } from "../../hooks/useCart";
+import useCart from "../../hooks/useCart";
 import classes from "./cartPage.module.css";
 import Price from "../../components/Price/Price";
 import NotFound from "../../components/NotFound/NotFound";

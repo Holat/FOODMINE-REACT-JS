@@ -1,7 +1,7 @@
 import classes from "./loginPage.module.css";
 import { useForm } from "react-hook-form";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useEffect } from "react";
 import Title from "../../components/Title/Title";
 import Button from "../../components/Button/Button";
