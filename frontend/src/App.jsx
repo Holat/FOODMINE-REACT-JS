@@ -1,4 +1,4 @@
-import AppRoutes from "./AppROutes.jsx";
+import AppRoutes from "./AppRoutes.jsx";
 import { Header } from "./components/Header/Header.jsx";
 import Loading from "./components/Loading/Loading.jsx";
 import setLoadingInterceptor from "./interceptors/loadingInterceptor.js";
