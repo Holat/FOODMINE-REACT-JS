@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../model/user.model.js";
 import bcrypt from "bcryptjs";
 import handler from "express-async-handler";
+import auth from "../middleware/auth.mid.js";
 
 import { BAD_REQUEST } from "../constants/httpStatus.js";
 
@@ -48,6 +49,49 @@ router.post(
 
     const result = await UserModel.create(newUser);
     res.send(generateTokenResponse(result));
+  })
+);
+
+router.put(
+  "/updateProfile",
+  auth,
+  handler(async (req, res) => {
+    const { name, address } = req.body;
+    const user = await UserModel.findByIdAndUpdate(
+      req.user.id,
+      { name, address },
+      { new: true }
+    );
+
+    console.log(user);
+
+    res.send(generateTokenResponse(user));
+    console.log(generateTokenResponse(user));
+  })
+);
+
+router.put(
+  "/changePassword",
+  auth,
+  handler(async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = await UserModel.findById(req.user.id);
+
+    if (!user) {
+      res.status(BAD_REQUEST).send("Change Password Failed!");
+      return;
+    }
+
+    const equal = await bcrypt.compare(currentPassword, user.password);
+    if (!equal) {
+      res.status(BAD_REQUEST).send("Current Password is Not Correct");
+      return;
+    }
+
+    user.password = await bcrypt.hash(newPassword, PASSWORD_HASH_SALT_ROUNDS);
+    await user.save();
+
+    res.send();
   })
 );
 

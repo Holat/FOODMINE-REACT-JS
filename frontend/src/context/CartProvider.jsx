@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext(null);
@@ -76,6 +75,14 @@ export default function CartProvider({ children }) {
     }
   };
 
+  const clearCart = () => {
+    localStorage.removeItem(CART_KEY);
+    const { items, totalPrice, totalCount } = EMPTY_CART;
+    setCartItems(items);
+    setTotalPrice(totalPrice);
+    setTotalCount(totalCount);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -83,6 +90,7 @@ export default function CartProvider({ children }) {
         removeFromCart,
         changeQuantity,
         addToCart,
+        clearCart,
       }}
     >
       {children}

@@ -8,3 +8,22 @@ export const createOrder = async (order) => {
     console.log(error);
   }
 };
+
+export const getNewOrderForCurrentUser = async () => {
+  const { data } = await axios.get("./api/orders/newOrderForCurrentUser");
+  return data;
+};
+
+export const pay = async (paymentId) => {
+  try {
+    const { data } = await axios.put("/api/orders/pay", { paymentId });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const trackOrderById = async (orderId) => {
+  const { data } = await axios.get("/api/orders/track/" + orderId);
+  return data;
+};

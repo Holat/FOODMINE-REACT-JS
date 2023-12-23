@@ -25,7 +25,6 @@ const LoginPage = () => {
   }, [user]);
 
   const submit = async ({ email, password }) => {
-    console.log("form was submitted", email, password);
     await login(email, password);
   };
 

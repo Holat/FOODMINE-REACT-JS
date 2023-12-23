@@ -1,8 +1,7 @@
-import { useState, createContext } from "react";
+import { useState } from "react";
 import * as userService from "../services/userService";
 import { toast } from "react-toastify";
-
-export const AuthContext = createContext(null);
+import { AuthContext } from "../hooks/useAuth";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(userService.getUser());
@@ -33,8 +32,22 @@ export default function AuthProvider({ children }) {
     toast.success("Logout Successful");
   };
 
+  const updateProfile = async (user) => {
+    const updatedUser = await userService.updateProfile(user);
+    toast.success("Profile Update was successful");
+    if (updatedUser) setUser(updatedUser);
+  };
+
+  const changePassword = async (passwords) => {
+    await userService.changePassword(passwords);
+    logout();
+    toast.success("Password Changed Successfully, Please Login Again!");
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, register }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, register, updateProfile, changePassword }}
+    >
       {children}
     </AuthContext.Provider>
   );
