@@ -63,10 +63,7 @@ router.put(
       { new: true }
     );
 
-    console.log(user);
-
     res.send(generateTokenResponse(user));
-    console.log(generateTokenResponse(user));
   })
 );
 
